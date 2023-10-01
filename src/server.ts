@@ -2,17 +2,19 @@ import express from "express";
 import { logger } from "./logger";
 import { apiErrorValidator } from "./middlewares/api-error-validator";
 import tasksRouter from "./routes/tasksRouter";
-import  config  from "config";
+import homeRouter from "./routes/home";
+import dotenv from "dotenv";
 
 ///import { router } from "./router";
 
 export class SetupServer {
     public app: express.Application;
-    constructor(private port = config.get("App.port")) {
+    constructor(private port = process.env.PORT) {
         this.app = express();
     }
 
     public async init() {
+        dotenv.config();
         this.setupExpress();
         this.setupErrorHandles();
         this.setupRoutes();
@@ -21,8 +23,7 @@ export class SetupServer {
     private setupExpress(): void {
         this.app.use(express.json());
         this.app.set("view engine", "ejs");
-        this.app.set('views', __dirname + '/views');
-
+        this.app.set("views", __dirname + "/views");
     }
 
     private async databaseSetup(): Promise<void> {
@@ -30,6 +31,7 @@ export class SetupServer {
     }
 
     private setupRoutes(): void {
+        this.app.use("/", homeRouter);
         this.app.use("/tasks", tasksRouter);
     }
 

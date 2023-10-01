@@ -1,12 +1,10 @@
 import pino from "pino";
-import config from "config";
 
 export const logger = pino({
-  level: config.get("App.logger.level"),
-  enabled: config.get("App.logger.enabled"),
+    level: process.env.LOGGER_LEVEL,
+    enabled: true,
 
-  transport: {
-    target: "pino-pretty",
-    
-  },
+    transport: {
+        target: "pino-pretty",
+    },
 });
