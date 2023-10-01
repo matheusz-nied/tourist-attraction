@@ -1,4 +1,5 @@
 import { logger } from "@src/logger";
+import { Attraction } from "@src/models/Attraction";
 import { Pool } from "pg";
 
 const pool = new Pool({
@@ -9,4 +10,6 @@ pool.on("connect", () => {
     logger.info("Database connection successful");
 });
 
-const query = (text: string, params: string[]):  => pool.query(text, params);
+export const db = {
+    query: (text: string, params: any) => pool.query(text, params),
+};

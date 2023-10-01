@@ -1,7 +1,7 @@
 import express from "express";
 import { logger } from "./logger";
 import { apiErrorValidator } from "./middlewares/api-error-validator";
-import tasksRouter from "./routes/tasksRouter";
+import attractionRouter from "./routes/attractionRouter";
 import homeRouter from "./routes/home";
 import dotenv from "dotenv";
 
@@ -32,7 +32,7 @@ export class SetupServer {
 
     private setupRoutes(): void {
         this.app.use("/", homeRouter);
-        this.app.use("/tasks", tasksRouter);
+        this.app.use("/attractions", attractionRouter);
     }
 
     public async close(): Promise<void> {
