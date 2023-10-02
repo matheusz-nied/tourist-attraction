@@ -1,12 +1,12 @@
 import User from "./User";
 
 export interface Location {
-    id?: string;
+    id?: number;
     country: string;
     state: string;
 }
 export interface Attraction {
-    id?: string;
+    id?: number;
     //user: User;
     name: string;
     description: string;

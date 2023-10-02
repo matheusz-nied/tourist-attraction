@@ -4,18 +4,12 @@ import { Request, Response, Router } from "express";
 const attractionRouter = Router();
 const attractionController = new AttractionController();
 
-attractionRouter.get("/get/:id", (req: Request, res: Response) => {
-res.send("ola")
-});
-attractionRouter.get("/getAll", attractionController.getAll);
+attractionRouter.get("/:id",  attractionController.getOne);
+attractionRouter.get("/", attractionController.getAll);
 attractionRouter.post("/", attractionController.create);
 
-attractionRouter.delete("/delete", (req: Request, res: Response) => {
-    return;
-});
+attractionRouter.delete("/",attractionController.delete);
 
-attractionRouter.put("/update", (req: Request, res: Response) => {
-    return;
-});
+attractionRouter.put("/:id", attractionController.update);
 
 export default attractionRouter;

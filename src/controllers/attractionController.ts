@@ -23,12 +23,36 @@ export class AttractionController {
     public async getAll(req: Request, res: Response): Promise<void> {
         const attractionRepository = new AttractionRepository();
         const attractions = await attractionRepository.getAll();
-        res.send( attractions)
+        res.send(attractions);
+    }
+    public async getOne(req: Request, res: Response): Promise<void> {
+        const attractionRepository = new AttractionRepository();
+        const attractionId = parseInt(req.params.id)
+        const attraction = await attractionRepository.getOne(attractionId);
+        res.send(attraction);  
+
+    }
+    public async update(req: Request, res: Response): Promise<void> {
+        const attractionId = parseInt(req.params.id)
+        let attraction: Attraction = {
+            id: attractionId,
+            name: req.body.name,
+            description: req.body.description,
+            location: req.body.location,
+            desire_visit: req.body.desire_visit,
+            is_viseted: req.body.is_viseted,
+            viseted_at: req.body.viseted_at
+        };
+        const attractionRepository = new AttractionRepository();
+        attraction = await attractionRepository.update(attraction);
+        res.send("attractions");
+    }
+    public async delete(req: Request, res: Response): Promise<void> {
+        res.send("attractions");
     }
 }
 
 function formatAttractionToRender(attraction: Attraction) {
-    console.log(attraction);
     const attractionToRender = {
         name: attraction.name,
         description: attraction.description,
