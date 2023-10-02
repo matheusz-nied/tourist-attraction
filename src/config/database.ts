@@ -10,6 +10,4 @@ pool.on("connect", () => {
     logger.info("Database connection successful");
 });
 
-export const db = {
-    query: (text: string, params: any) => pool.query(text, params),
-};
+export { pool as db };
