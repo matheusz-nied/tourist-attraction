@@ -35,14 +35,13 @@ export class AttractionRepository implements AttractionRepositoryInterface {
                 "INSERT INTO location (country, state) VALUES ($1, $2) RETURNING id",
                 [country, state],
             );
-                const idLocation = responseLocation.rows[0].id
+            const idLocation = responseLocation.rows[0].id;
             const response = await db.query(
                 "INSERT INTO attraction (name, description,desire_visit, location_id) VALUES ($1, $2, $3, $4) RETURNING *",
                 [name, description, desire_visit, idLocation],
             );
 
-            logger.info(response.rows[0])
-
+            logger.info(response.rows[0]);
         } catch (error) {
             logger.error(error);
         }
@@ -50,13 +49,14 @@ export class AttractionRepository implements AttractionRepositoryInterface {
 
     async update(attraction: Attraction): Promise<Attraction> {
         const responseLocation = await db.query(
-            "UPDATE location SET country = $1, state = $2 WHERE id = $3 RETURNING id",
-            [attraction.location.country, attraction.location.state, attraction.location.id],
-        );    
+            "UPDATE location SET country = $1, state = $2 WHERE id = $3 RETURNING *",
+            [
+                attraction.location.country,
+                attraction.location.state,
+                attraction.location.id,
+            ],
+        );
 
-        const idLocation = responseLocation.rows[0].id
-
-        
         const response = await db.query(
             "UPDATE attraction SET name = $1, description = $2, desire_visit = $3, is_viseted = $4, viseted_at = $5  WHERE id = $6 RETURNING *",
             [
@@ -65,12 +65,11 @@ export class AttractionRepository implements AttractionRepositoryInterface {
                 attraction.desire_visit,
                 attraction.is_viseted,
                 attraction.viseted_at,
-                attraction.id
+                attraction.id,
             ],
         );
-        logger.info(response.rows[0])
-
-        return response.rows[0]
+        attraction = Object.assign(response.rows[0], responseLocation.rows[0]);
+        return attraction;
     }
 
     delete(): Promise<Attraction> {

@@ -48,7 +48,7 @@ export class AttractionController {
         res.send("attractions");
     }
     public async delete(req: Request, res: Response): Promise<void> {
-        res.send("attractions");
+        const attractionId = parseInt(req.params.id)
     }
 }
 

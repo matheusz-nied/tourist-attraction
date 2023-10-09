@@ -8,7 +8,7 @@ attractionRouter.get("/:id",  attractionController.getOne);
 attractionRouter.get("/", attractionController.getAll);
 attractionRouter.post("/", attractionController.create);
 
-attractionRouter.delete("/",attractionController.delete);
+attractionRouter.delete("/:id",attractionController.delete);
 
 attractionRouter.put("/:id", attractionController.update);
 
