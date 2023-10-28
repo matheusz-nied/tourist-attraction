@@ -27,13 +27,12 @@ export class AttractionController {
     }
     public async getOne(req: Request, res: Response): Promise<void> {
         const attractionRepository = new AttractionRepository();
-        const attractionId = parseInt(req.params.id)
+        const attractionId = parseInt(req.params.id);
         const attraction = await attractionRepository.getOne(attractionId);
-        res.send(attraction);  
-
+        res.send(attraction);
     }
     public async update(req: Request, res: Response): Promise<void> {
-        const attractionId = parseInt(req.params.id)
+        const attractionId = parseInt(req.params.id);
         let attraction: Attraction = {
             id: attractionId,
             name: req.body.name,
@@ -41,14 +40,19 @@ export class AttractionController {
             location: req.body.location,
             desire_visit: req.body.desire_visit,
             is_viseted: req.body.is_viseted,
-            viseted_at: req.body.viseted_at
+            viseted_at: req.body.viseted_at,
         };
         const attractionRepository = new AttractionRepository();
         attraction = await attractionRepository.update(attraction);
-        res.send("attractions");
+        res.send(attraction);
     }
     public async delete(req: Request, res: Response): Promise<void> {
-        const attractionId = parseInt(req.params.id)
+        const attractionId = parseInt(req.params.id);
+
+        const attractionRepository = new AttractionRepository();
+        const result = attractionRepository.delete(attractionId);
+
+        res.send(result);
     }
 }
 

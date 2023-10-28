@@ -17,7 +17,7 @@ export class AttractionRepository implements AttractionRepositoryInterface {
 
     async getAll(): Promise<Attraction[]> {
         const response = await db.query(
-            "SELECT * FROM attraction ORDER BY desire_visit ASC",
+            "SELECT * FROM attraction ORDER BY desire_visit DESC",
         );
         return response.rows;
     }
@@ -41,7 +41,7 @@ export class AttractionRepository implements AttractionRepositoryInterface {
                 [name, description, desire_visit, idLocation],
             );
 
-            logger.info(response.rows[0]);
+            return response.rows[0];
         } catch (error) {
             logger.error(error);
         }
@@ -72,7 +72,30 @@ export class AttractionRepository implements AttractionRepositoryInterface {
         return attraction;
     }
 
-    delete(): Promise<Attraction> {
-        return new Promise<Attraction>((resolve, reject) => {});
+    async delete(attractionId: number): Promise<object> {
+        const response = await db.query(
+            "SELECT * FROM attraction WHERE id = $1",
+            [attractionId],
+        );
+        let resultLocation = {};
+
+        if(response.rows[0] > 0){
+            const locationId = response.rows[0].locationId;
+
+            resultLocation = await db.query(
+                "DELETE FROM location WHERE id = $1",
+                [locationId],
+            )
+        }
+        ;
+        
+
+        const resultAttraction = await db.query(
+            "DELETE FROM attraction WHERE id = $1",
+            [attractionId],
+        );
+        logger.info(resultAttraction);
+
+        return { ...resultLocation, ...resultAttraction };
     }
 }

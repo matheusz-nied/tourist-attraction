@@ -1,5 +1,4 @@
 import { logger } from "@src/logger";
-import { Attraction } from "@src/models/Attraction";
 import { Pool } from "pg";
 
 const pool = new Pool({

@@ -5,5 +5,5 @@ export interface AttractionRepositoryInterface {
     getAll(): Promise<Attraction[]>;
     create({ name, description, location, desire_visit }: Attraction): Promise<void>;
     update(attraction: Attraction): Promise<Attraction>;
-    delete(): Promise<Attraction>;
+    delete(attractionId: number): Promise<object>;
 }
