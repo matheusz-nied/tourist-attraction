@@ -1,15 +1,38 @@
-# ToDo
+# **Projeto: Pontos Turísticos - Estudo de Autenticação e TDD**
 
-<h1>
-         <img src="src/img/banner.png" >
-</h1>
+## **Descrição:**
+Este projeto tem como objetivo criar um sistema de cadastro de pontos turísticos, enfocando o estudo de autenticação e TDD (Desenvolvimento Orientado a Testes). Desenvolvido com Node.js, Typescript, PostgreSQL, EJS (Embedded JavaScript), e Jest para testes, o projeto oferece uma base sólida para a compreensão prática de autenticação e TDD em ambientes web.
 
-Aplicação backend com Node.js, onde usuário pode cadastrar tarefas a se fazer
+## **Tecnologias Utilizadas:**
+- Node.js
+- Typescript
+- PostgreSQL
+- EJS
+- Jest (TDD)
 
-## 🔧 Tecnologias
+## **Instruções de Instalação:**
+1. Clone o repositório.
+   ```bash
+   git clone https://github.com/seu-usuario/pontos-turisticos.git
+   ```
+2. Navegue até o diretório do projeto.
+   ```bash
+   cd pontos-turisticos
+   ```
+3. Instale as dependências.
+   ```bash
+   npm install
+   ```
 
- <img align="center" alt="javascript" height="30" width="40" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" /> JavaScript 
- <img align="center" alt="react" height="30" width="40" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg" /> Node.js
- <img align="center" alt="react" height="30" width="40" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/sqlite/postgres-original.svg" /> PostgreSQL
- <img align="center" alt="git" height="30" width="40" src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg" /> Git
- <img align="center" alt="git" height="30" width="30" src="https://www.svgrepo.com/show/353930/jest.svg" /> Jest
+## **Como Usar:**
+1. Configure o banco de dados PostgreSQL e atualize as configurações no arquivo `ormconfig.json`.
+2. Execute as migrações do banco de dados.
+   ```bash
+   npm run typeorm migration:run
+   ```
+3. Inicie o servidor.
+   ```bash
+   npm start
+   ```
+
+Explore este projeto, que proporciona uma oportunidade valiosa para aprender sobre autenticação e TDD em um contexto prático de desenvolvimento web.
